@@ -1,0 +1,89 @@
+.kanban-container {
+  display: flex;
+  gap: 10px;
+}
+.kanban-column {
+  width: 30%;
+  background: #f4f4f4;
+  padding: 10px;
+  border-radius: 5px;
+}
+.task {
+  background: white;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 3px;
+  cursor: grab;
+  border: 3px solid black;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.priority {
+  font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 5px;
+  display: inline-block;
+}
+.priority.Urgente {
+  background-color: red;
+  color: white;
+}
+.priority.Alta {
+  background-color: orange;
+  color: white;
+}
+.priority.Media {
+  background-color: yellow;
+  color: black;
+}
+.priority.Baja {
+  background-color: green;
+  color: white;
+}
+.priority.Opcional {
+  background-color: blue;
+  color: white;
+}
+.labels {
+  display: flex;
+  gap: 5px;
+}
+.label {
+  background: lightgray;
+  padding: 3px 6px;
+  border-radius: 3px;
+}
+.edit-modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+}
+.add-task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.add-task-form input {
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+.add-task-form button {
+  padding: 8px 12px;
+  background-color: #28a745;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.add-task-form button:hover {
+  background-color: #218838;
+}
+

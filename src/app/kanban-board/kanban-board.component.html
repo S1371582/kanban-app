@@ -1,0 +1,30 @@
+<input type="text" [(ngModel)]="searchQuery" placeholder="Buscar tarea..." />
+
+<!-- Botón para mostrar el formulario de nueva tarea -->
+<button (click)="toggleTaskForm()">➕ Nueva Tarea</button>
+
+<!-- Formulario de edición de tarea -->
+<div class="edit-task-form" *ngIf="showEditForm">
+  <input type="text" [(ngModel)]="editingTask.title" placeholder="Título de la tarea" />
+  <input type="text" [(ngModel)]="editingTask.assignedTo" placeholder="Asignado a" />
+  <input type="date" [(ngModel)]="editingTask.dueDate" placeholder="Fecha límite" />
+  <button (click)="saveTask()">💾 Guardar</button>
+  <button (click)="showEditForm = false">❌ Cancelar</button>
+</div>
+
+<div class="kanban-container">
+  <div class="kanban-column" *ngFor="let column of columns">
+    <h3>{{ column }}</h3>
+    <div class="task" *ngFor="let task of getTasksForColumn(column)" [ngClass]="task.status">
+      <span class="task-title">{{ task.title }}</span>
+      <span class="priority" [ngClass]="task.priority">{{ task.priority }}</span>
+      <span class="assigned-user">👤 {{ task.assignedTo }}</span>
+      <span class="due-date">📅 {{ task.dueDate }}</span>
+      <div class="labels">
+        <span *ngFor="let label of task.labels" class="label">{{ label }}</span>
+      </div>
+      <button (click)="editTask(task)">✏️</button>
+      <button (click)="deleteTask(task)">🗑️</button>
+    </div>
+  </div>
+</div>
