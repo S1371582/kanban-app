@@ -3,14 +3,54 @@
 <!-- Botón para mostrar el formulario de nueva tarea -->
 <button (click)="toggleTaskForm()">➕ Nueva Tarea</button>
 
-<!-- Formulario de edición de tarea -->
-<div class="edit-task-form" *ngIf="showEditForm">
-  <input type="text" [(ngModel)]="editingTask.title" placeholder="Título de la tarea" />
-  <input type="text" [(ngModel)]="editingTask.assignedTo" placeholder="Asignado a" />
-  <input type="date" [(ngModel)]="editingTask.dueDate" placeholder="Fecha límite" />
-  <button (click)="saveTask()">💾 Guardar</button>
-  <button (click)="showEditForm = false">❌ Cancelar</button>
+<!-- Formulario para agregar una nueva tarea en una tarjeta flotante -->
+<div class="task-modal" *ngIf="showTaskForm">
+  <div class="task-card">
+    <h3>Nueva Tarea</h3>
+    <input type="text" [(ngModel)]="newTask.title" placeholder="Título de la tarea" />
+    <input type="text" [(ngModel)]="newTask.assignedTo" placeholder="Asignado a" />
+    <input type="date" [(ngModel)]="newTask.dueDate" placeholder="Fecha límite" />
+
+    <select [(ngModel)]="newTask.priority">
+      <option value="Urgente">Urgente</option>
+      <option value="Alta">Alta</option>
+      <option value="Media">Media</option>
+      <option value="Baja">Baja</option>
+      <option value="Opcional">Opcional</option>
+    </select>
+
+    <!-- Input para etiquetas -->
+    <input type="text" [(ngModel)]="labelsInput" placeholder="Etiquetas (separadas por comas)" />
+
+    <button (click)="addTask()">Agregar</button>
+    <button (click)="toggleTaskForm()">Cancelar</button>
+  </div>
 </div>
+
+<!-- Formulario para editar una tarea existente -->
+<div class="task-modal" *ngIf="showEditForm">
+  <div class="task-card">
+    <h3>Editar Tarea</h3>
+    <input type="text" [(ngModel)]="editingTask.title" placeholder="Título de la tarea" />
+    <input type="text" [(ngModel)]="editingTask.assignedTo" placeholder="Asignado a" />
+    <input type="date" [(ngModel)]="editingTask.dueDate" placeholder="Fecha límite" />
+
+    <select [(ngModel)]="editingTask.priority">
+      <option value="Urgente">Urgente</option>
+      <option value="Alta">Alta</option>
+      <option value="Media">Media</option>
+      <option value="Baja">Baja</option>
+      <option value="Opcional">Opcional</option>
+    </select>
+
+    <!-- Input para editar etiquetas -->
+    <input type="text" [(ngModel)]="editLabelsInput" placeholder="Etiquetas (separadas por comas)" />
+
+    <button (click)="saveTask()">Guardar</button>
+    <button (click)="showEditForm = false">Cancelar</button>
+  </div>
+</div>
+
 
 <div class="kanban-container">
   <div class="kanban-column" *ngFor="let column of columns">
@@ -28,3 +68,7 @@
     </div>
   </div>
 </div>
+
+<mat-card appearance="outlined">
+  <mat-card-content>Simple card</mat-card-content>
+</mat-card>

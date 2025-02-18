@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import {MatCardModule} from '@angular/material/card';
 
 @Component({
   selector: 'app-kanban-board',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, MatCardModule],
   templateUrl: './kanban-board.component.html',
   styleUrls: ['./kanban-board.component.scss']
 })
@@ -26,6 +27,8 @@ export class KanbanBoardComponent {
   newTask: any = { title: '', status: 'Pendiente', priority: 'Media', assignedTo: '', dueDate: '', labels: [] };
   showTaskForm = false;
   showEditForm = false;
+  labelsInput = '';  // Para almacenar la entrada de etiquetas en nueva tarea
+  editLabelsInput = ''; // Para almacenar etiquetas en edición
 
   getTasksForColumn(column: string) {
     return this.tasks
@@ -57,9 +60,18 @@ export class KanbanBoardComponent {
 
   addTask() {
     if (this.newTask.title.trim()) {
+      // Convertir las etiquetas ingresadas en un array
+      this.newTask.labels = this.labelsInput
+        .split(',')
+        .map(label => label.trim())
+        .filter(label => label !== ''); // Eliminar etiquetas vacías
+
       this.tasks.push({ ...this.newTask });
+
+      // Reiniciar valores
       this.newTask = { title: '', status: 'Pendiente', priority: 'Media', assignedTo: '', dueDate: '', labels: [] };
+      this.labelsInput = '';
       this.showTaskForm = false;
     }
-  }
+ }
 }
